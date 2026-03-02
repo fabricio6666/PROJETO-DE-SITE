@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Minha Ideia Empreendedora</title>
+    <meta charset="UTF-8">
+    <title>FocusFlow - Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Descubra seu potencial!</h1>
+    <div class="container">
+        <div class="login-box">
+            <h1>Focus<span>Flow</span></h1>
+            <p>Organize seus estudos aqui Tchê</p>
 
-    <input type="text" id="nomeUsuario" placeholder="Digite seu nome">
-    <button onclick="gerarMensagem()">Descobrir</button>
+            <form>
+                <input type="email" placeholder="E-mail @educacao" required>
+                <input type="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
 
-    <p id="resultado"></p>
-
-    <script src="script.js"></script>
 </body>
 </html>
