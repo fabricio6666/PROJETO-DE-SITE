@@ -1,17 +1,17 @@
 // ===== CADASTRO =====
-if (window.location.pathname.includes("cadastro")) {
 
-const form = document.querySelector("form");
+const cadastroForm = document.getElementById("cadastroForm");
 
-form.addEventListener("submit", function(e){
+if (cadastroForm) {
+
+cadastroForm.addEventListener("submit", function(e){
 
 e.preventDefault();
 
-const nome = document.querySelector('input[type="text"]').value;
-const email = document.querySelector('input[type="email"]').value;
-const senha = document.querySelector('input[type="password"]').value;
+const nome = document.getElementById("nome").value;
+const email = document.getElementById("email").value;
+const senha = document.getElementById("senha").value;
 
-// salva no navegador
 localStorage.setItem("nome", nome);
 localStorage.setItem("email", email);
 localStorage.setItem("senha", senha);
@@ -25,17 +25,19 @@ window.location.href = "index.html";
 }
 
 
+
 // ===== LOGIN =====
-if (window.location.pathname.includes("index")) {
 
-const form = document.querySelector("form");
+const loginForm = document.getElementById("loginForm");
 
-form.addEventListener("submit", function(e){
+if (loginForm) {
+
+loginForm.addEventListener("submit", function(e){
 
 e.preventDefault();
 
-const emailDigitado = document.querySelector('input[type="email"]').value;
-const senhaDigitada = document.querySelector('input[type="password"]').value;
+const emailDigitado = document.getElementById("emailLogin").value;
+const senhaDigitada = document.getElementById("senhaLogin").value;
 
 const emailSalvo = localStorage.getItem("email");
 const senhaSalva = localStorage.getItem("senha");
