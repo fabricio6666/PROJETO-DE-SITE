@@ -1,57 +1,87 @@
-// ===== CADASTRO =====
+// ===== PEGAR ELEMENTOS =====
 
 const cadastroForm = document.getElementById("cadastroForm");
+const loginForm = document.getElementById("loginForm");
+
+const loginTela = document.getElementById("loginTela");
+const dashboard = document.getElementById("dashboard");
+const nomeUsuario = document.getElementById("nomeUsuario");
+
+
+// ===== CADASTRO =====
 
 if (cadastroForm) {
+    cadastroForm.addEventListener("submit", function(e){
+        e.preventDefault();
 
-cadastroForm.addEventListener("submit", function(e){
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
 
-e.preventDefault();
+        localStorage.setItem("nome", nome);
+        localStorage.setItem("email", email);
+        localStorage.setItem("senha", senha);
 
-const nome = document.getElementById("nome").value;
-const email = document.getElementById("email").value;
-const senha = document.getElementById("senha").value;
+        alert("Conta criada com sucesso!");
 
-localStorage.setItem("nome", nome);
-localStorage.setItem("email", email);
-localStorage.setItem("senha", senha);
-
-alert("Conta criada com sucesso!");
-
-window.location.href = "index.html";
-
-});
-
+        window.location.href = "index.html";
+    });
 }
-
 
 
 // ===== LOGIN =====
 
-const loginForm = document.getElementById("loginForm");
-
 if (loginForm) {
+    loginForm.addEventListener("submit", function(e){
+        e.preventDefault();
 
-loginForm.addEventListener("submit", function(e){
+        const emailDigitado = document.getElementById("emailLogin").value;
+        const senhaDigitada = document.getElementById("senhaLogin").value;
 
-e.preventDefault();
+        const emailSalvo = localStorage.getItem("email");
+        const senhaSalva = localStorage.getItem("senha");
 
-const emailDigitado = document.getElementById("emailLogin").value;
-const senhaDigitada = document.getElementById("senhaLogin").value;
+        if(emailDigitado === emailSalvo && senhaDigitada === senhaSalva){
 
-const emailSalvo = localStorage.getItem("email");
-const senhaSalva = localStorage.getItem("senha");
+            alert("Login realizado com sucesso!");
 
-if(emailDigitado === emailSalvo && senhaDigitada === senhaSalva){
+            localStorage.setItem("logado", "true");
 
-alert("Login realizado com sucesso!");
+            // Mostra dashboard sem precisar recarregar
+            mostrarDashboard();
 
-}else{
-
-alert("Email ou senha incorretos");
-
+        } else {
+            alert("Email ou senha incorretos");
+        }
+    });
 }
 
-});
 
+// ===== FUNÇÃO MOSTRAR DASHBOARD =====
+
+function mostrarDashboard(){
+    if(loginTela && dashboard){
+        loginTela.style.display = "none";
+        dashboard.style.display = "block";
+
+        const nome = localStorage.getItem("nome");
+        if(nomeUsuario){
+            nomeUsuario.innerText = "E aí, " + nome + " 👊";
+        }
+    }
+}
+
+
+// ===== VERIFICAR AO ABRIR O SITE =====
+
+if(localStorage.getItem("logado") === "true"){
+    mostrarDashboard();
+}
+
+
+// ===== LOGOUT =====
+
+function logout(){
+    localStorage.removeItem("logado");
+    window.location.reload();
 }
